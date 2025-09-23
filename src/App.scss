@@ -1,0 +1,3 @@
+@use "./styles/partials/colors"; /* defines :root CSS vars */
+@use "./styles/partials/mixins" as *; /* only needed if you @include here */
+@use "./styles/partials/globals"; /* reset/base */

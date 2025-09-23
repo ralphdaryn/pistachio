@@ -1,30 +1,30 @@
-@use "./mixins" as *;
-@use "./colors" as *;
-
+/* _globals.scss — reset + base (no imports here) */
 *,
-*::after,
-*::before {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+*::before,
+*::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html,
-body,
-#root {
-  height: 100%;
-}
+html, body, #root { height: 100%; }
 
 body {
   font-family: "Quicksand", sans-serif;
+  color: var(--text, #1f2328);
+  background: var(--bg, #ffffff);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
   scroll-behavior: smooth;
 }
 
-ul {
-  list-style: none;
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+img, picture, video, canvas, svg { display: block; max-width: 100%; height: auto; }
+input, button, textarea, select { font: inherit; }
+
+ul { list-style: none; }
+a  { text-decoration: none; color: inherit; }
+
+a:focus-visible, button:focus-visible, input:focus-visible {
+  outline: 2px solid var(--accent, #776c5d);
+  outline-offset: 2px;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
-}
+.app { min-height: 100dvh; display: flex; flex-direction: column; }

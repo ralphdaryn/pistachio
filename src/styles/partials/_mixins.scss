@@ -1,11 +1,26 @@
+/* Breakpoints */
+$bp-tablet: 768px;
+$bp-desktop: 1280px;
+
 @mixin tablet {
-  @media (min-width: 768px) {
-    @content;
-  }
+  @media (min-width: $bp-tablet) { @content; }
 }
 
 @mixin desktop {
-  @media (min-width: 1280px) {
-    @content;
-  }
+  @media (min-width: $bp-desktop) { @content; }
+}
+
+/* Screen-reader-only */
+@mixin sr-only {
+  position: absolute !important;
+  height: 1px; width: 1px;
+  overflow: hidden; clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
+}
+
+/* Centered container helper (optional) */
+@mixin container($max: 1100px, $pad: 16px) {
+  max-width: $max;
+  margin-inline: auto;
+  padding-inline: $pad;
 }
