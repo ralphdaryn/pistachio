@@ -199,11 +199,11 @@
   }
 
   &__cta {
-    width: 8.5rem;
+    width: fit-content;
     margin-top: 0.5rem;
     display: inline-block;
     text-decoration: none;
-    background: #868373;
+    background: #868373; /* neutral pulled from palette */
     color: #fff;
     font-weight: 700;
     padding: 0.75rem 1.1rem;
@@ -218,8 +218,8 @@
     }
   }
 
-  /* WHY CHOOSE US */
-  &__why {
+  /* GENERIC SECTIONS */
+  &__section {
     margin-top: 2rem;
     padding: 1.25rem;
     background:
@@ -245,17 +245,31 @@
     }
   }
 
-  &__reasons {
+  &__list {
+    display: grid;
+    gap: 0.5rem;
+    list-style: none;
+    padding-left: 0;
+  }
+
+  &__item {
+    background: #fff;
+    border: 1px solid var(--home-border);
+    border-radius: 0.75rem;
+    padding: 0.75rem 0.9rem;
+  }
+
+  &__grid {
     display: grid;
     gap: 0.9rem;
 
     @media (min-width: 700px) {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 1rem;
     }
   }
 
-  &__reason {
+  &__card {
     background: #fff;
     border: 1px solid var(--home-border);
     border-radius: var(--home-radius);
@@ -270,16 +284,62 @@
     }
   }
 
-  &__reason-title {
+  &__card-title {
     font-size: 1.05rem;
     margin-bottom: 0.35rem;
     color: var(--home-fg);
   }
 
-  &__reason-text {
+  &__card-text {
     color: var(--home-muted);
     font-size: 0.95rem;
     line-height: 1.5;
+  }
+
+  &__muted { color: var(--home-muted); }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  &__button {
+    display: inline-block;
+    padding: 0.6rem 0.95rem;
+    border-radius: 0.75rem;
+    border: 1px solid var(--home-border);
+    background: #fff;
+    color: var(--home-fg);
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 120ms ease, background 140ms ease, border-color 140ms ease;
+
+    &:hover {
+      transform: translateY(-1px);
+      background: color-mix(in oklab, var(--home-surface) 75%, white);
+      border-color: color-mix(in oklab, var(--home-accent) 25%, var(--home-border));
+    }
+
+    &--ghost {
+      background: transparent;
+    }
+  }
+
+  &__contact {
+    display: grid;
+    gap: 0.75rem;
+
+    @media (min-width: 700px) {
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: 1rem;
+    }
+  }
+
+  &__contact-info {
+    display: grid;
+    gap: 0.25rem;
   }
 }
 
@@ -293,6 +353,8 @@
     --home-accent: color-mix(in oklab, #d4c6b2 24%, #b0927a);
     --home-border: color-mix(in oklab, #f2efe9 12%, #2a2622);
 
-    .home__reason { background: #1a1816; }
+    .home__card,
+    .home__item,
+    .home__button { background: #1a1816; }
   }
 }

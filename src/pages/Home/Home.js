@@ -3,20 +3,17 @@ import "./Home.scss";
 
 const SLIDES = [
   {
-    src:
-      "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1600&auto=format&fit=crop",
+    src: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1600&auto=format&fit=crop",
     alt: "Smiling family enjoying an event outdoors",
     caption: "Memories that last forever",
   },
   {
-    src:
-      "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1600&auto=format&fit=crop",
+    src: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1600&auto=format&fit=crop",
     alt: "Balloon decorations at a birthday party",
     caption: "We bring the vibes",
   },
   {
-    src:
-      "https://images.unsplash.com/photo-1533105079780-92b9be482077?q=80&w=1600&auto=format&fit=crop",
+    src: "https://images.unsplash.com/photo-1533105079780-92b9be482077?q=80&w=1600&auto=format&fit=crop",
     alt: "Photographer taking candid photos",
     caption: "Candid moments, perfect shots",
   },
@@ -49,7 +46,9 @@ const Home = () => {
           {SLIDES.map((slide, i) => (
             <figure
               key={i}
-              className={`home__slide ${i === index ? "home__slide--active" : ""}`}
+              className={`home__slide ${
+                i === index ? "home__slide--active" : ""
+              }`}
               aria-hidden={i !== index}
             >
               <img className="home__image" src={slide.src} alt={slide.alt} />
@@ -76,7 +75,9 @@ const Home = () => {
             {SLIDES.map((_, i) => (
               <button
                 key={i}
-                className={`home__dot ${i === index ? "home__dot--active" : ""}`}
+                className={`home__dot ${
+                  i === index ? "home__dot--active" : ""
+                }`}
                 onClick={() => goTo(i)}
                 role="tab"
                 aria-selected={i === index}
@@ -88,38 +89,135 @@ const Home = () => {
 
         {/* WELCOME / SLOGAN */}
         <div className="home__welcome">
-          <h1 className="home__title">Welcome to Our Website</h1>
-          <p className="home__tagline">“Celebrate moments. We’ll handle the magic.”</p>
+          <h1 className="home__title">Capture joy. Keep the moment.</h1>
+          <p className="home__tagline">
+            “Celebrate the day — we’ll handle the magic.”
+          </p>
 
+          {/* QUICK LINKS */}
+          <nav className="home__quicklinks" aria-label="Mini section links">
+            <a className="home__link" href="#services">
+              Services
+            </a>
+            <a className="home__link" href="#packages">
+              Packages
+            </a>
+            <a className="home__link" href="#gallery">
+              Gallery
+            </a>
+            <a className="home__link" href="#faq">
+              FAQ
+            </a>
+            <a className="home__link" href="#contact">
+              Get a Quote
+            </a>
+          </nav>
 
           {/* CTA */}
-          <a className="home__cta" href="/quote">Get a Quote</a>
+          <a className="home__cta" href="/quote">
+            Get a Quote
+          </a>
         </div>
       </section>
 
-      {/* WHY CHOOSE US */}
-      <section className="home__why" aria-labelledby="why-title">
-        <h2 id="why-title" className="home__section-title">Why Choose Us?</h2>
-        <ul className="home__reasons">
-          <li className="home__reason">
-            <h3 className="home__reason-title">Pro Team</h3>
-            <p className="home__reason-text">
-              Experienced staff focused on smooth, stress-free events.
-            </p>
-          </li>
-          <li className="home__reason">
-            <h3 className="home__reason-title">All-in-One</h3>
-            <p className="home__reason-text">
-              Services and packages tailored to your budget and style.
-            </p>
-          </li>
-          <li className="home__reason">
-            <h3 className="home__reason-title">Photo-Ready</h3>
-            <p className="home__reason-text">
-              Candid moments, pro lighting, and a gallery you’ll love.
-            </p>
-          </li>
+      {/* SIMPLE CARDS FOR YOUR SECTIONS */}
+      <section
+        id="services"
+        className="home__section"
+        aria-labelledby="services-title"
+      >
+        <h2 id="services-title" className="home__section-title">
+          Services
+        </h2>
+        <ul className="home__list">
+          <li className="home__item">Photobooth Rental Packages</li>
+          <li className="home__item">Backdrops</li>
+          <li className="home__item">Props</li>
+          <li className="home__item">Layout Designs</li>
+          <li className="home__item">What to Expect</li>
         </ul>
+      </section>
+
+      <section
+        id="packages"
+        className="home__section"
+        aria-labelledby="packages-title"
+      >
+        <h2 id="packages-title" className="home__section-title">
+          Packages
+        </h2>
+        <div className="home__grid">
+          <article className="home__card">
+            <h3 className="home__card-title">Our Packages</h3>
+            <p className="home__card-text">Basic • Advanced • Luxury</p>
+          </article>
+          <article className="home__card">
+            <h3 className="home__card-title">Backdrops</h3>
+            <p className="home__card-text">Standard • Premium</p>
+          </article>
+          <article className="home__card">
+            <h3 className="home__card-title">Layout Design</h3>
+            <p className="home__card-text">Browse example templates</p>
+          </article>
+          <article className="home__card">
+            <h3 className="home__card-title">Add‑Ons</h3>
+            <p className="home__card-text">Props, prints, sharing & more</p>
+          </article>
+        </div>
+      </section>
+
+      <section
+        id="gallery"
+        className="home__section"
+        aria-labelledby="gallery-title"
+      >
+        <h2 id="gallery-title" className="home__section-title">
+          Gallery
+        </h2>
+        <p className="home__muted">Peek at moments we’ve captured.</p>
+        <div className="home__actions">
+          <a className="home__button" href="/gallery">
+            Sample Gallery
+          </a>
+          <a
+            className="home__button home__button--ghost"
+            href="https://your-online-gallery.example"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Find Your Event
+          </a>
+        </div>
+      </section>
+
+      <section id="faq" className="home__section" aria-labelledby="faq-title">
+        <h2 id="faq-title" className="home__section-title">
+          FAQ
+        </h2>
+        <p className="home__muted">TBA — coming soon.</p>
+      </section>
+
+      <section
+        id="contact"
+        className="home__section"
+        aria-labelledby="contact-title"
+      >
+        <h2 id="contact-title" className="home__section-title">
+          Contact
+        </h2>
+        <div className="home__contact">
+          <a className="home__button" href="/quote">
+            Get a Quote
+          </a>
+          <div className="home__contact-info">
+            <p className="home__muted">
+              <strong>Phone:</strong> (555) 123‑4567
+            </p>
+            <p className="home__muted">
+              <strong>Email:</strong> hello@example.com
+            </p>
+          </div>
+        </div>
       </section>
     </main>
   );
