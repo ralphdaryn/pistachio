@@ -94,25 +94,6 @@ const Home = () => {
             “Celebrate the day — we’ll handle the magic.”
           </p>
 
-          {/* QUICK LINKS */}
-          <nav className="home__quicklinks" aria-label="Mini section links">
-            <a className="home__link" href="#services">
-              Services
-            </a>
-            <a className="home__link" href="#packages">
-              Packages
-            </a>
-            <a className="home__link" href="#gallery">
-              Gallery
-            </a>
-            <a className="home__link" href="#faq">
-              FAQ
-            </a>
-            <a className="home__link" href="#contact">
-              Get a Quote
-            </a>
-          </nav>
-
           {/* CTA */}
           <a className="home__cta" href="/quote">
             Get a Quote
