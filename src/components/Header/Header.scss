@@ -122,11 +122,9 @@
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.28);
+  background: rgba(0, 0, 0, 0);
 }
-.header__overlay--visible {
-  display: block;
-}
+
 
 /* tablet+ (inline nav bar) */
 @media (min-width: 768px) {
