@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import "./Header.scss";
-import logo from "../../assets/images/mobile_logo.jpg"; // make sure this file exists
+import logo from "../../assets/images/mobile_logo.png"; // make sure this file exists
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -12,7 +12,6 @@ export default function Header() {
       <div className="header__inner">
         <Link to="/" className="header__brand" onClick={closeMenu}>
           <img className="header__logo" src={logo} alt="Brand logo" />
-          <span className="header__title">Pistachio</span>
         </Link>
 
         <button
