@@ -1,7 +1,7 @@
-/* 👇 ALWAYS put @use FIRST */
+@use "./colors"; 
 @use "./mixins" as *; 
 @use "./fonts";
- /* defines :root CSS vars */ 
+ 
 
 *,
 *::before,
