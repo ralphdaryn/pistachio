@@ -1,9 +1,21 @@
-/* _globals.scss — reset + base (no imports here) */
+/* 👇 ALWAYS put @use FIRST */
+@use "./mixins" as *; 
+@use "./fonts";
+ /* defines :root CSS vars */ 
+
 *,
 *::before,
-*::after { box-sizing: border-box; margin: 0; padding: 0; }
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-html, body, #root { height: 100%; }
+html,
+body,
+#root {
+  height: 100%;
+}
 
 body {
   font-family: "EBGaramond", serif;
@@ -14,17 +26,77 @@ body {
   scroll-behavior: smooth;
 }
 
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
 
-img, picture, video, canvas, svg { display: block; max-width: 100%; height: auto; }
-input, button, textarea, select { font: inherit; }
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
 
-ul { list-style: none; }
-a  { text-decoration: none; color: inherit; }
+ul {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
 
-a:focus-visible, button:focus-visible, input:focus-visible {
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
   outline: 2px solid var(--accent, #776c5d);
   outline-offset: 2px;
 }
 
-.app { min-height: 100dvh; display: flex; flex-direction: column; }
+.app {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Breakpoints */
+$bp-tablet: 768px;
+$bp-desktop: 1280px;
+
+@mixin tablet {
+  @media (min-width: $bp-tablet) {
+    @content;
+  }
+}
+@mixin desktop {
+  @media (min-width: $bp-desktop) {
+    @content;
+  }
+}
+
+/* Screen-reader-only */
+@mixin sr-only {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px);
+  white-space: nowrap;
+}
+
+/* Centered container helper (optional) */
+@mixin container($max: 1100px, $pad: 16px) {
+  max-width: $max;
+  margin-inline: auto;
+  padding-inline: $pad;
+}
