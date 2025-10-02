@@ -19,16 +19,3 @@
   --hover:  rgba(0, 0, 0, 0.04);
   --shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
 }
-
-/* Optional: dark mode defaults (remove if you don't want) */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #1a1a1a;
-    --surface: #222;
-    --text: #f0f0f0;
-    --border: rgba(255, 255, 255, 0.12);
-    --hover: rgba(255, 255, 255, 0.06);
-    --accent-weak: rgba(119, 108, 93, 0.35);
-    --shadow: none;
-  }
-}
