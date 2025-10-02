@@ -1,7 +1,6 @@
 [build]
-  base = "client"        # run builds from /client
   command = "npm run build"
-  publish = "build"      # CRA outputs to /client/build
+  publish = "build"
 
 [[redirects]]
   from = "/*"
