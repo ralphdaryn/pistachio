@@ -1,357 +1,360 @@
-/* Home.scss — self-contained styles using fixed colors (no CSS vars) */
-
-/* ===== Palette (SCSS variables) ===== */
-$color-cream: hsl(51, 25%, 90%);
-$color-stone: #a8a698;
-$color-sand: #d4c6b2;
-$color-walnut: #776c5d;
-
-$text: #1f2328;
-$muted: #6b7280;
-$surface: #ffffff;
-$bg: $color-cream;
-
-$border: rgba(0, 0, 0, 0.12);
-$hover: rgba(0, 0, 0, 0.04);
-$shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
-
-/* ===== Layout helpers ===== */
-$bp-tablet: 768px;
-$bp-desktop: 1280px;
-
-@mixin tablet {
-  @media (min-width: $bp-tablet) {
-    @content;
-  }
-}
-@mixin desktop {
-  @media (min-width: $bp-desktop) {
-    @content;
-  }
+/* Palette (your scheme) */
+:root {
+  --color-cream:  hsl(51, 25%, 90%);
+  --color-stone:  #a8a698;
+  --color-sand:   #d4c6b2;
+  --color-walnut: #776c5d;
 }
 
-/* ===== Page base ===== */
+/* BEM + mobile-first + theme mapped to your palette */
 .home {
-  color: $text;
-  background: $bg;
-}
+  /* Map palette -> theme tokens */
+  --home-bg: var(--color-cream);
+  --home-fg: #2f2a24;               /* readable on cream (slightly deeper than walnut) */
+  --home-muted: var(--color-stone);
+  --home-accent: var(--color-walnut);
+  --home-surface: var(--color-sand);
+  --home-radius: 1rem;
+  --home-border: color-mix(in oklab, var(--home-fg) 12%, white);
 
-/* ===== HERO / CAROUSEL ===== */
-.home__hero {
-  position: relative;
-  display: grid;
-  gap: 1.25rem;
-  padding: 2rem 1rem 3rem;
-  background: $bg;
-  border-bottom: 1px solid $border; /* divider below hero */
+  background: var(--home-bg);
+  color: var(--home-fg);
+  display: block;
 
-  @include tablet {
-    grid-template-columns: 1.1fr 0.9fr;
-    align-items: center;
-    padding: 3rem 2rem 4rem;
-  }
-  @include desktop {
-    padding: 4rem 0;
+  /* HERO */
+  &__hero {
+    position: relative;
+    display: grid;
+    gap: 1.25rem;
+    padding: 1rem;
     max-width: 1200px;
     margin-inline: auto;
-  }
-}
 
-.home__carousel {
-  position: relative;
-  border-radius: 18px;
-  overflow: hidden;
-  box-shadow: $shadow;
-  background: $surface;
-  min-height: 280px;
-
-  @include tablet {
-    min-height: 420px;
-  }
-}
-
-.home__slide {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transform: scale(1.02);
-  transition: opacity 0.6s ease, transform 0.8s ease;
-  display: grid;
-
-  &--active {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-.home__image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  /* gentle harmonization so Unsplash shots match palette a bit better */
-  filter: saturate(1.02) contrast(1.02);
-}
-
-.home__caption {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 0.85rem 1rem;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0));
-  color: #fff;
-  font-weight: 600;
-  letter-spacing: 0.2px;
-}
-
-/* controls */
-.home__control {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  height: 40px;
-  width: 40px;
-  display: grid;
-  place-items: center;
-  border: 1px solid $border;
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(4px);
-  border-radius: 999px;
-  cursor: pointer;
-  user-select: none;
-  box-shadow: $shadow;
-  transition: transform 0.15s ease, background-color 0.15s ease;
-
-  &:hover {
-    background: $surface;
-    transform: translateY(-50%) scale(1.05);
-  }
-  &:active {
-    transform: translateY(-50%) scale(0.98);
-  }
-
-  &--prev {
-    left: 0.75rem;
-  }
-  &--next {
-    right: 0.75rem;
-  }
-
-  @include tablet {
-    height: 44px;
-    width: 44px;
-    &--prev {
-      left: 1rem;
-    }
-    &--next {
-      right: 1rem;
+    @media (min-width: 900px) {
+      grid-template-columns: 1.4fr 1fr;
+      align-items: center;
+      padding: 2rem 1.25rem;
+      gap: 2rem;
     }
   }
-}
 
-/* dots */
-.home__dots {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0.75rem;
-  display: flex;
-  gap: 0.5rem;
-  justify-content: center;
-  pointer-events: none; /* only dots themselves clickable */
-}
-.home__dot {
-  pointer-events: auto;
-  height: 10px;
-  width: 10px;
-  background: rgba(0, 0, 0, 0.25);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: 999px;
-  cursor: pointer;
-  transition: transform 0.12s ease, background-color 0.15s ease;
+  /* CAROUSEL */
+  &__carousel {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--home-radius);
+    background: #000;
+    min-height: 18rem;
 
-  &:hover {
-    transform: scale(1.08);
-  }
-  &--active {
-    background: #ffffff;
-    border-color: rgba(0, 0, 0, 0.35);
-  }
-}
-
-/* ===== WELCOME / SLOGAN + CTA ===== */
-.home__welcome {
-  padding: 0.5rem 0 0;
-
-  @include tablet {
-    padding: 0 1rem;
-  }
-}
-
-.home__title {
-  font-size: clamp(1.8rem, 1.3rem + 2vw, 3rem);
-  line-height: 1.1;
-  margin-bottom: 0.35rem;
-  color: $text;
-}
-
-.home__tagline {
-  font-size: clamp(1rem, 0.95rem + 0.4vw, 1.25rem);
-  color: $muted;
-  margin-bottom: 1.25rem;
-}
-
-.home__cta {
-  display: inline-block;
-  background: $color-walnut;
-  color: #fff;
-  padding: 0.75rem 1.1rem;
-  border-radius: 999px;
-  box-shadow: $shadow;
-  transition: transform 0.15s ease, box-shadow 0.15s ease,
-    background-color 0.15s ease;
-
-  &:hover {
-    transform: translateY(-1px);
-    background: darken($color-walnut, 4%);
-  }
-  &:active {
-    transform: translateY(0);
-  }
-}
-
-/* ===== Sections (with subtle separation) ===== */
-$section-shade: mix(#000, $bg, 4%); /* slightly darker than $bg */
-
-.home__section {
-  position: relative;
-  padding: 2.25rem 1rem;
-  background: $bg;
-
-  /* divider line above every section after the first */
-  & + .home__section {
-    border-top: 1px solid $border;
+    @media (min-width: 600px) { min-height: 22rem; }
+    @media (min-width: 900px) { min-height: 26rem; }
   }
 
-  @include desktop {
-    max-width: 1100px;
-    margin-inline: auto;
-    padding: 3rem 0;
-  }
-}
+  &__slide {
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    transition: opacity 400ms ease;
 
-/* alternate shaded background to visually break sections */
-.home__section:nth-of-type(even) {
-  background: $section-shade;
-}
-
-/* soft top fade for extra depth (on all sections) */
-.home__section::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  height: 16px;
-  pointer-events: none;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0));
-}
-
-/* headings + text */
-.home__section-title {
-  font-size: clamp(1.3rem, 1.1rem + 0.9vw, 1.8rem);
-  margin-bottom: 0.75rem;
-  color: $text;
-}
-
-.home__muted {
-  color: $muted;
-}
-
-/* list */
-.home__list {
-  display: grid;
-  gap: 0.5rem;
-  padding: 0.25rem 0;
-}
-.home__item {
-  padding: 0.6rem 0.8rem;
-  background: $surface;
-  border: 1px solid $border;
-  border-radius: 12px;
-}
-
-/* cards grid */
-.home__grid {
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: 1fr;
-  @include tablet {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  @include desktop {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-.home__card {
-  background: $surface;
-  border: 1px solid $border;
-  border-radius: 16px;
-  padding: 1rem;
-  box-shadow: $shadow;
-}
-
-.home__card-title {
-  font-weight: 700;
-  margin-bottom: 0.25rem;
-  color: $text;
-}
-.home__card-text {
-  color: $muted;
-}
-
-/* buttons */
-.home__actions {
-  display: flex;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-  margin-top: 0.75rem;
-}
-.home__button {
-  display: inline-block;
-  background: $color-walnut;
-  color: #fff;
-  padding: 0.65rem 1rem;
-  border-radius: 10px;
-  box-shadow: $shadow;
-  transition: background-color 0.15s ease, transform 0.15s ease;
-
-  &:hover {
-    background: darken($color-walnut, 6%);
-    transform: translateY(-1px);
+    &--active {
+      opacity: 1;
+      pointer-events: auto;
+    }
   }
 
-  &--ghost {
-    background: transparent;
-    color: $color-walnut;
-    border: 1px solid $color-walnut;
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    aspect-ratio: 16 / 9;
+  }
+
+  &__caption {
+    position: absolute;
+    left: 1rem;
+    bottom: 1rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    backdrop-filter: blur(6px);
+    background: color-mix(in oklab, black 45%, transparent);
+    color: #fff;
+    font-size: 0.95rem;
+
+    @media (min-width: 900px) { font-size: 1.05rem; }
+  }
+
+  &__control {
+    position: absolute;
+    top: 50%;
+    translate: 0 -50%;
+    border: 1px solid rgba(255,255,255,.35);
+    background: color-mix(in lab, white 18%, transparent);
+    backdrop-filter: blur(4px);
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 999px;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition: transform 120ms ease, background 120ms ease, border-color 120ms ease;
+    color: #fff;
+
     &:hover {
-      background: rgba(119, 108, 93, 0.08);
+      transform: scale(1.05);
+      background: color-mix(in lab, white 35%, transparent);
+      border-color: rgba(255,255,255,.6);
+    }
+
+    &--prev { left: 0.75rem; }
+    &--next { right: 0.75rem; }
+
+    @media (min-width: 900px) {
+      width: 3rem;
+      height: 3rem;
+      font-size: 1.75rem;
+      &--prev { left: 1rem; }
+      &--next { right: 1rem; }
     }
   }
-}
 
-/* contact row */
-.home__contact {
-  display: grid;
-  gap: 0.75rem;
-  align-items: center;
+  &__dots {
+    position: absolute;
+    left: 50%;
+    bottom: 0.75rem;
+    translate: -50% 0;
+    display: flex;
+    gap: 0.5rem;
+  }
 
-  @include tablet {
-    grid-template-columns: auto 1fr;
+  &__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+    border: 2px solid #fff;
+    background: transparent;
+    opacity: 0.9;
+    cursor: pointer;
+
+    &--active {
+      background: #fff;
+      opacity: 1;
+    }
+  }
+
+  /* WELCOME + QUICK LINKS + CTA */
+  &__welcome {
+    display: grid;
+    gap: 0.75rem;
+    padding: 0.25rem;
+
+    @media (min-width: 900px) {
+      gap: 0.9rem;
+      padding: 0.5rem 0.75rem;
+    }
+  }
+
+  &__title {
+    font-size: 1.75rem;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+
+    @media (min-width: 600px) { font-size: 2rem; }
+    @media (min-width: 900px) { font-size: 2.25rem; }
+  }
+
+  &__tagline {
+    color: var(--home-muted);
+    font-size: 1rem;
+    @media (min-width: 900px) { font-size: 1.05rem; }
+  }
+
+  &__quicklinks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.25rem;
+  }
+
+  &__link {
+    display: inline-block;
+    padding: 0.55rem 0.85rem;
+    border-radius: 999px;
+    background: var(--home-surface);
+    border: 1px solid var(--home-border);
+    text-decoration: none;
+    color: var(--home-fg);
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: background 140ms ease, border-color 140ms ease, transform 120ms ease;
+
+    &:hover {
+      transform: translateY(-1px);
+      border-color: color-mix(in oklab, var(--home-accent) 25%, var(--home-border));
+      background: color-mix(in oklab, var(--home-surface) 70%, white);
+    }
+  }
+
+  &__cta {
+    width: fit-content;
+    margin-top: 0.5rem;
+    display: inline-block;
+    text-decoration: none;
+    background: #868373; /* neutral pulled from palette */
+    color: #fff;
+    font-weight: 700;
+    padding: 0.75rem 1.1rem;
+    border-radius: 0.8rem;
+    box-shadow: 0 6px 16px color-mix(in oklab, var(--home-accent) 35%, transparent);
+    transition: transform 120ms ease, box-shadow 120ms ease, opacity 120ms ease;
+
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px color-mix(in oklab, var(--home-accent) 40%, transparent);
+      opacity: 0.95;
+    }
+  }
+
+  /* GENERIC SECTIONS */
+  &__section {
+    margin-top: 2rem;
+    padding: 1.25rem;
+    background:
+      linear-gradient(180deg,
+        color-mix(in oklab, var(--home-surface) 80%, white),
+        var(--home-bg)
+      );
+
+    @media (min-width: 900px) {
+      margin-top: 3rem;
+      padding: 2rem 1.25rem;
+    }
+  }
+
+  &__section-title {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    color: var(--home-accent);
+
+    @media (min-width: 900px) {
+      font-size: 1.6rem;
+      margin-bottom: 1.25rem;
+    }
+  }
+
+  &__list {
+    display: grid;
+    gap: 0.5rem;
+    list-style: none;
+    padding-left: 0;
+  }
+
+  &__item {
+    background: #fff;
+    border: 1px solid var(--home-border);
+    border-radius: 0.75rem;
+    padding: 0.75rem 0.9rem;
+  }
+
+  &__grid {
+    display: grid;
+    gap: 0.9rem;
+
+    @media (min-width: 700px) {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+    }
+  }
+
+  &__card {
+    background: #fff;
+    border: 1px solid var(--home-border);
+    border-radius: var(--home-radius);
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,.04);
+    transition: transform 120ms ease, box-shadow 120ms ease, border-color 140ms ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,.06);
+      border-color: color-mix(in oklab, var(--home-accent) 24%, var(--home-border));
+    }
+  }
+
+  &__card-title {
+    font-size: 1.05rem;
+    margin-bottom: 0.35rem;
+    color: var(--home-fg);
+  }
+
+  &__card-text {
+    color: var(--home-muted);
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  &__muted { color: var(--home-muted); }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  &__button {
+    display: inline-block;
+    padding: 0.6rem 0.95rem;
+    border-radius: 0.75rem;
+    border: 1px solid var(--home-border);
+    background: #fff;
+    color: var(--home-fg);
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 120ms ease, background 140ms ease, border-color 140ms ease;
+
+    &:hover {
+      transform: translateY(-1px);
+      background: color-mix(in oklab, var(--home-surface) 75%, white);
+      border-color: color-mix(in oklab, var(--home-accent) 25%, var(--home-border));
+    }
+
+    &--ghost {
+      background: transparent;
+    }
+  }
+
+  &__contact {
+    display: grid;
+    gap: 0.75rem;
+
+    @media (min-width: 700px) {
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: 1rem;
+    }
+  }
+
+  &__contact-info {
+    display: grid;
+    gap: 0.25rem;
   }
 }
-.home__contact-info {
-  color: $muted;
+
+/* Optional: dark mode tuned to your palette */
+@media (prefers-color-scheme: dark) {
+  .home {
+    --home-bg: #141210;                        /* deep walnut/cream mix */
+    --home-fg: #f2efe9;
+    --home-muted: color-mix(in oklab, #a8a698 70%, #eee);
+    --home-surface: color-mix(in oklab, #776c5d 24%, #1a1816);
+    --home-accent: color-mix(in oklab, #d4c6b2 24%, #b0927a);
+    --home-border: color-mix(in oklab, #f2efe9 12%, #2a2622);
+
+    .home__card,
+    .home__item,
+    .home__button { background: #1a1816; }
+  }
 }
